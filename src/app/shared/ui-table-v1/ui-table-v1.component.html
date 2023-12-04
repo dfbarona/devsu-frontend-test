@@ -1,1 +1,35 @@
-<p>ui-table-v1 works!</p>
+<div class="main-container">
+	<table class="__table">
+		<thead class="__head">
+			<tr class="__row">
+				@for (tableColumn of tableColumns; track $index) {
+					<th class="__cell">
+						<span class="text-body--1">{{ tableColumn.label }}</span>
+					</th>
+				}
+			</tr>
+		</thead>
+		<tbody class="__body">
+			@for (tableData of tableDataSet; track $index) {
+				<tr class="__row">
+					@for (tableColumn of tableColumns; track $index) {
+						<td class="__cell">
+							@if (tableColumn.type == 'image') {
+								<img
+									class="--image"
+									src="{{ tableData[tableColumn.keyword] }}"
+									alt="{{ tableData['name'] }}" />
+							} @else if (tableColumn.type == 'date') {
+								<span class="text-body--1">{{
+									tableData[tableColumn.keyword] | date: 'dd/MM/YYYY'
+								}}</span>
+							} @else {
+								<span class="text-body--1">{{ tableData[tableColumn.keyword] }}</span>
+							}
+						</td>
+					}
+				</tr>
+			}
+		</tbody>
+	</table>
+</div>

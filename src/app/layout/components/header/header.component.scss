@@ -1,9 +1,11 @@
+@import "../../../styles/variables.scss";
+
 .main-container{
 	display: flex;
 	align-items: center;
 	justify-content: center;
 	width: 100%;
-	height: 80px;
+	height: $header-height;
 	padding-block: 16px;
 	
 	.__logo-image {
