@@ -29,7 +29,7 @@ export class ListComponent implements OnInit {
 
 	getProducts() {
 		this._productsService.getProducts().subscribe((event: any) => {
-			this.dataSet = event;
+			this.dataSet = event.reverse();
 		});
 	}
 }

@@ -5,9 +5,10 @@
 				<input
 					class="__input"
 					type="text"
-					name="filterProduct"
+					name="searchTerm"
 					placeholder="Buscar..."
-					[(ngModel)]="filterProduct" />
+					[(ngModel)]="searchTerm"
+					(input)="filterData()" />
 			</div>
 		</form>
 		<button
@@ -28,7 +29,7 @@
 				</tr>
 			</thead>
 			<tbody class="__body">
-				@for (tableData of tableDataSet | filterText: filterProduct; track $index) {
+				@for (tableData of filteredData | paginate: currentPage : itemsPerPage; track $index) {
 					<tr class="__row">
 						@for (tableColumn of tableColumns; track $index) {
 							<td class="__cell">
@@ -50,5 +51,35 @@
 				}
 			</tbody>
 		</table>
+		<div class="table-footer">
+			<span class="__count-records">{{ filteredData.length | pluralize: 'Resultado' }} </span>
+			<div class="__paginate">
+				<button
+					class="__button"
+					[disabled]="currentPage === 0"
+					(click)="prevPage()">
+					Anteriores
+				</button>
+				<button
+					class="__button"
+					[disabled]="filteredData.length - itemsPerPage <= currentPage"
+					(click)="nextPage()">
+					Siguientes
+				</button>
+			</div>
+			<form class="__form--1">
+				<div class="__field">
+					<select
+						class="__input"
+						name="itemsPerPage"
+						(change)="filterData()"
+						[(ngModel)]="itemsPerPage">
+						<option value="5">5</option>
+						<option value="10">10</option>
+						<option value="20">20</option>
+					</select>
+				</div>
+			</form>
+		</div>
 	</div>
 </div>

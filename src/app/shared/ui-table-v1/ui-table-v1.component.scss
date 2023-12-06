@@ -11,6 +11,7 @@
 		border-radius: 12px;
 		background-color: $light-color;
 		.__table {
+			min-width: 800px;
 			.__cell {
 				padding: 1rem;
 				border-bottom: 1px solid $gray-color;
@@ -31,6 +32,16 @@
 					}
 				}
 			}
+		}
+	}
+	.table-footer {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		margin-top: 1rem;
+		.__paginate {
+			display: flex;
+			gap: 1rem;
 		}
 	}
 }
