@@ -6,6 +6,6 @@ import { Pipe, PipeTransform } from '@angular/core';
 })
 export class PaginatePipe implements PipeTransform {
 	transform(records: any[], page: number, itemsPerPage: number): any {
-		return records.slice(page, page + itemsPerPage);
+		return records.slice(page, Number(page) + Number(itemsPerPage));
 	}
 }

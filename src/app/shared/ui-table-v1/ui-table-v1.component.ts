@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, inject } from '@angular/core';
+import { Component, Input, OnInit, DoCheck, inject, OnChanges } from '@angular/core';
 import { TableColumns } from '../../interfaces/table.interfaces';
 import { DatePipe } from '@angular/common';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
@@ -13,7 +13,7 @@ import { PluralizePipe } from '../../pipes/pluralize/pluralize.pipe';
 	templateUrl: './ui-table-v1.component.html',
 	styleUrl: './ui-table-v1.component.scss',
 })
-export class UiTableV1Component {
+export class UiTableV1Component implements OnChanges {
 	private _router = inject(Router);
 	private _activatedRoute = inject(ActivatedRoute);
 
@@ -25,6 +25,10 @@ export class UiTableV1Component {
 	searchTerm = '';
 	itemsPerPage: number = 5;
 	currentPage: number = 0;
+
+	ngOnChanges(): void {
+		this.filteredData = this.tableDataSet;
+	}
 
 	filterData() {
 		if (this.searchTerm.length >= 3) {
@@ -42,7 +46,7 @@ export class UiTableV1Component {
 	}
 
 	nextPage() {
-		this.currentPage += this.itemsPerPage;
+		this.currentPage = this.currentPage + this.itemsPerPage;
 	}
 
 	prevPage() {
