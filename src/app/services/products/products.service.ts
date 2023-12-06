@@ -18,13 +18,14 @@ export class ProductsService {
 	constructor() {}
 
 	getProducts() {
-		return this._http.get<Products>(`${this._apiUrl}/${this._productsEndpoint}`, {
+		return this._http.get<Products[]>(`${this._apiUrl}/${this._productsEndpoint}`, {
 			headers: this._headers,
 		});
 	}
 
 	postProducts(body: any) {
-		return this._http.post(`${this._apiUrl}/${this._productsEndpoint}`, body, {
+		const stringifyBody = JSON.stringify(body);
+		return this._http.post(`${this._apiUrl}/${this._productsEndpoint}`, stringifyBody, {
 			headers: this._headers,
 		});
 	}
@@ -39,5 +40,14 @@ export class ProductsService {
 		return this._http.delete(`${this._apiUrl}/${this._productsEndpoint}/${id}`, {
 			headers: this._headers,
 		});
+	}
+
+	verificationProduct(id: any) {
+		return this._http.get<boolean>(
+			`${this._apiUrl}/${this._productsEndpoint}/verification?id=${id}`,
+			{
+				headers: this._headers,
+			}
+		);
 	}
 }

@@ -1,35 +1,11 @@
-import { Component, OnInit, inject } from '@angular/core';
-import { UiTableV1Component } from '../../../shared/ui-table-v1/ui-table-v1.component';
-import { TableColumns } from '../../../interfaces/table.interfaces';
-import { ProductsService } from '../../../services/products/products.service';
+import { Component } from '@angular/core';
+import { RouterOutlet } from '@angular/router';
 
 @Component({
 	selector: 'app-product-page',
 	standalone: true,
-	imports: [UiTableV1Component],
+	imports: [RouterOutlet],
 	templateUrl: './product-page.component.html',
 	styleUrl: './product-page.component.scss',
 })
-export class ProductPageComponent implements OnInit {
-	private _productsService = inject(ProductsService);
-
-	columns: TableColumns[] = [
-		{ label: 'Logo', keyword: 'logo', type: 'image' },
-		{ label: 'Nombre del producto', keyword: 'name' },
-		{ label: 'Descripción', keyword: 'description' },
-		{ label: 'Fecha de liberación', keyword: 'date_release', type: 'date' },
-		{ label: 'Fecha de reestructuración', keyword: 'date_revision', type: 'date' },
-	];
-
-	dataSet: any[] = [];
-
-	ngOnInit(): void {
-		this.getProducts();
-	}
-
-	getProducts() {
-		this._productsService.getProducts().subscribe((event: any) => {
-			this.dataSet = event;
-		});
-	}
-}
+export class ProductPageComponent {}

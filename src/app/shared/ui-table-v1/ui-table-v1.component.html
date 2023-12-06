@@ -1,35 +1,54 @@
 <div class="main-container">
-	<table class="__table">
-		<thead class="__head">
-			<tr class="__row">
-				@for (tableColumn of tableColumns; track $index) {
-					<th class="__cell">
-						<span class="text-body--1">{{ tableColumn.label }}</span>
-					</th>
-				}
-			</tr>
-		</thead>
-		<tbody class="__body">
-			@for (tableData of tableDataSet; track $index) {
+	<div class="options">
+		<form class="__form--1">
+			<div class="__field">
+				<input
+					class="__input"
+					type="text"
+					name="filterProduct"
+					placeholder="Buscar..."
+					[(ngModel)]="filterProduct" />
+			</div>
+		</form>
+		<button
+			class="__button --fill"
+			(click)="goTo()">
+			<span class="text-body--1"><b>Agregar</b></span>
+		</button>
+	</div>
+	<div class="table-container">
+		<table class="__table">
+			<thead class="__head">
 				<tr class="__row">
 					@for (tableColumn of tableColumns; track $index) {
-						<td class="__cell">
-							@if (tableColumn.type == 'image') {
-								<img
-									class="--image"
-									src="{{ tableData[tableColumn.keyword] }}"
-									alt="{{ tableData['name'] }}" />
-							} @else if (tableColumn.type == 'date') {
-								<span class="text-body--1">{{
-									tableData[tableColumn.keyword] | date: 'dd/MM/YYYY'
-								}}</span>
-							} @else {
-								<span class="text-body--1">{{ tableData[tableColumn.keyword] }}</span>
-							}
-						</td>
+						<th class="__cell">
+							<span class="text-body--1">{{ tableColumn.label }}</span>
+						</th>
 					}
 				</tr>
-			}
-		</tbody>
-	</table>
+			</thead>
+			<tbody class="__body">
+				@for (tableData of tableDataSet | filterText: filterProduct; track $index) {
+					<tr class="__row">
+						@for (tableColumn of tableColumns; track $index) {
+							<td class="__cell">
+								@if (tableColumn.type == 'image') {
+									<img
+										class="--image"
+										src="{{ tableData[tableColumn.keyword] }}"
+										alt="{{ tableData['name'] }}" />
+								} @else if (tableColumn.type == 'date') {
+									<span class="text-body--1">{{
+										tableData[tableColumn.keyword] | date: 'dd/MM/YYYY'
+									}}</span>
+								} @else {
+									<span class="text-body--1">{{ tableData[tableColumn.keyword] }}</span>
+								}
+							</td>
+						}
+					</tr>
+				}
+			</tbody>
+		</table>
+	</div>
 </div>

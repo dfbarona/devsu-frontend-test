@@ -1,7 +1,7 @@
-@import "./variables.scss";
+@import './variables.scss';
 
 .heading--1 {
-	font-size: calc($base-size * 2);
+	font-size: calc($base-size * 1.75);
 	b {
 		font-weight: bold;
 	}
@@ -23,6 +23,13 @@
 
 .text-body--1 {
 	font-size: calc($base-size * 1);
+	b {
+		font-weight: 500;
+	}
+}
+
+.text-body--2 {
+	font-size: calc($base-size * 0.75);
 	b {
 		font-weight: 500;
 	}

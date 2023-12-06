@@ -1,6 +1,10 @@
-/* You can add global styles to this file, and also import other style files */
+// Fonts
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;400;500;700&display=swap');
+
+// Global Styles
 @import './app/styles/texts.scss';
+@import './app/styles/forms.scss';
+@import './app/styles/buttons.scss';
 
 * {
 	margin: 0;

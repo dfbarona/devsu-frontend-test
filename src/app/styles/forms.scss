@@ -1,0 +1,33 @@
+.__form--1 {
+	.__field {
+		.__input {
+			display: block;
+			width: 100%;
+			padding: 0.5rem 1rem;
+			border-radius: 0.5rem;
+			font-size: 1rem;
+			border: 1px solid $gray-color;
+			&:focus {
+				outline: 1px solid $secondary-color;
+				border: none;
+			}
+			&[type='date'] {
+				display: inline;
+			}
+
+			&.ng-invalid.ng-touched {
+				border: 1px solid red;
+			}
+		}
+
+		.validations {
+			display: flex;
+			flex-direction: column;
+			gap: 0.25rem;
+
+			.__span {
+				color: red;
+			}
+		}
+	}
+}
