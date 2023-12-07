@@ -20,3 +20,31 @@
 		}
 	}
 }
+
+.__alert {
+	position: absolute;
+	top: 1rem;
+	right: 1rem;
+	width: 300px;
+	padding: 1rem;
+	border-radius: 8px;
+	visibility: hidden;
+	opacity: 0;
+	transition: all 0.25s ease-in;
+	cursor: pointer;
+
+	&.--success {
+		background-color: $success-color;
+		color: $light-color;
+	}
+
+	&.--error {
+		background-color: $error-color;
+		color: $light-color;
+	}
+
+	&.--visible {
+		visibility: visible;
+		opacity: 1;
+	}
+}

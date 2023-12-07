@@ -8,3 +8,11 @@
 		</div>
 	</main>
 </div>
+
+<div
+	class="__alert"
+	[class]="type"
+	[ngClass]="{ '--visible': showAlert }">
+	{{ message }}
+</div>
+@if (showAlert) {}

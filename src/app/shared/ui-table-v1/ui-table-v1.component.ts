@@ -8,6 +8,7 @@ import { PluralizePipe } from '../../pipes/pluralize/pluralize.pipe';
 import { Options } from '../../interfaces/options.interfaces';
 import { UiModalV1Component } from '../ui-modal-v1/ui-modal-v1.component';
 import { ProductsService } from '../../services/products/products.service';
+import { AlertsService } from '../../services/alerts/alerts.service';
 
 @Component({
 	selector: 'app-ui-table-v1',
@@ -28,6 +29,7 @@ export class UiTableV1Component implements OnChanges {
 	private _router = inject(Router);
 	private _activatedRoute = inject(ActivatedRoute);
 	private _productsService = inject(ProductsService);
+	private _alertService = inject(AlertsService);
 
 	@Input() tableColumns!: TableColumns[];
 	@Input() tableDataSet!: any[];
@@ -104,13 +106,14 @@ export class UiTableV1Component implements OnChanges {
 				if (error.status === 200) {
 					this.updateRecords();
 				} else {
-					console.error('Error en la suscripción:', error.status);
+					this._alertService.showAlert('No se pudó eliminar el producto', 'error');
 				}
 			}
 		);
 	}
 
 	updateRecords() {
+		this._alertService.showAlert('El producto se eliminó satisfactoriamente', 'success');
 		this.tableDataSet = this.tableDataSet.filter((item) => {
 			return item.id != this.IdProductDelete;
 		});

@@ -102,6 +102,10 @@
 					<div class="validations">
 						@if (logoField?.touched && logoField?.hasError('required')) {
 							<span class="__span text-body--2">Este campo es requerido</span>
+						} @else if (logoField?.hasError('imagenInvalida')) {
+							<span class="__span text-body--2"
+								>La URL no es de una iamgen valida ('jpg', 'jpeg', 'png', 'gif', 'bmp')</span
+							>
 						}
 					</div>
 				}

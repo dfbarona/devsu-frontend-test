@@ -4,6 +4,9 @@ import { ProductsService } from '../../../../services/products/products.service'
 import { NgClass } from '@angular/common';
 import { HttpErrorResponse } from '@angular/common/http';
 import { IdService } from '../../../../services/validators/id/id.service';
+import { ActivatedRoute, Router } from '@angular/router';
+import { AlertsService } from '../../../../services/alerts/alerts.service';
+import { LogoService } from '../../../../services/validators/logo/logo.service';
 
 type Type = 'post' | 'update';
 
@@ -18,6 +21,10 @@ export class FormProductComponent implements OnInit {
 	private _formBuilder = inject(FormBuilder);
 	private _productsService = inject(ProductsService);
 	private _idService = inject(IdService);
+	private _router = inject(Router);
+	private _activatedRoute = inject(ActivatedRoute);
+	private _alertService = inject(AlertsService);
+	private _logoService = inject(LogoService);
 
 	@Input() formTitle!: string;
 	@Input() type!: Type;
@@ -44,7 +51,7 @@ export class FormProductComponent implements OnInit {
 			],
 			name: ['', [Validators.required, Validators.minLength(5), Validators.maxLength(100)]],
 			description: ['', [Validators.required, Validators.minLength(10), Validators.maxLength(200)]],
-			logo: ['', [Validators.required]],
+			logo: ['', [Validators.required, this._logoService.imagenUrlValidator()]],
 			dateRelease: ['', [Validators.required]],
 		});
 	}
@@ -91,31 +98,29 @@ export class FormProductComponent implements OnInit {
 		this._productsService.postProducts(product).subscribe(
 			() => {
 				this.reset();
-				console.log('La respuesta fue correcta');
+				this._alertService.showAlert('El producto se creó satisfactoriamente', 'success');
 			},
 			(error: HttpErrorResponse) => {
 				if (error.error instanceof ErrorEvent) {
-					console.error('Error del lado del cliente:', error.error.message);
+					this._alertService.showAlert(error.error.message, 'error');
 				} else {
-					console.error(`Código de error ${error.status}, ` + `cuerpo: ${error.error}`);
+					this._alertService.showAlert('No se pudo realizar la actualización', 'error');
 				}
 			}
 		);
 	}
 
 	updateForm(product: any) {
-		console.log(product);
-
 		this._productsService.putProducts(product).subscribe(
 			() => {
-				this.reset();
-				console.log('La respuesta fue correcta');
+				this._alertService.showAlert('El producto se actualizó correctamente', 'success');
+				this._router.navigate(['../../list'], { relativeTo: this._activatedRoute });
 			},
 			(error: HttpErrorResponse) => {
 				if (error.error instanceof ErrorEvent) {
-					console.error('Error del lado del cliente:', error.error.message);
+					this._alertService.showAlert(error.error.message, 'error');
 				} else {
-					console.error(`Código de error ${error.status}, ` + `cuerpo: ${error.error}`);
+					this._alertService.showAlert('No se pudo realizar la actualización', 'error');
 				}
 			}
 		);
