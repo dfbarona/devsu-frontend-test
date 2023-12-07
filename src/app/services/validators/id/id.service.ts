@@ -1,9 +1,4 @@
-import {
-	AbstractControl,
-	ValidationErrors,
-	AsyncValidatorFn,
-	AsyncValidator,
-} from '@angular/forms';
+import { AbstractControl, ValidationErrors, AsyncValidatorFn } from '@angular/forms';
 import { Observable, of, timer } from 'rxjs';
 import { switchMap, map, catchError } from 'rxjs/operators';
 import { Injectable, inject } from '@angular/core';

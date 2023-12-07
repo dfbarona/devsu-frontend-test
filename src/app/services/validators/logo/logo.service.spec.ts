@@ -3,7 +3,6 @@ import { TestBed } from '@angular/core/testing';
 import { LogoService } from './logo.service';
 
 describe('LogoService', () => {
-	/*
 	let service: LogoService;
 
 	beforeEach(() => {
@@ -14,5 +13,4 @@ describe('LogoService', () => {
 	it('should be created', () => {
 		expect(service).toBeTruthy();
 	});
-	*/
 });
