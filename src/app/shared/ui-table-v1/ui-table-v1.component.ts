@@ -1,15 +1,16 @@
 import { Component, Input, OnInit, DoCheck, inject, OnChanges } from '@angular/core';
 import { TableColumns } from '../../interfaces/table.interfaces';
-import { DatePipe } from '@angular/common';
+import { DatePipe, NgClass } from '@angular/common';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { PaginatePipe } from '../../pipes/paginate/paginate.pipe';
 import { FormsModule } from '@angular/forms';
 import { PluralizePipe } from '../../pipes/pluralize/pluralize.pipe';
+import { Options } from '../../interfaces/options.interfaces';
 
 @Component({
 	selector: 'app-ui-table-v1',
 	standalone: true,
-	imports: [DatePipe, RouterLink, FormsModule, PaginatePipe, PluralizePipe],
+	imports: [DatePipe, RouterLink, FormsModule, PaginatePipe, PluralizePipe, NgClass],
 	templateUrl: './ui-table-v1.component.html',
 	styleUrl: './ui-table-v1.component.scss',
 })
@@ -20,11 +21,14 @@ export class UiTableV1Component implements OnChanges {
 	@Input() tableColumns!: TableColumns[];
 	@Input() tableDataSet!: any[];
 	@Input() buttonActionPath!: string;
+	@Input() options!: Options[];
 
 	filteredData: any[] = [];
 	searchTerm = '';
 	itemsPerPage: number = 5;
 	currentPage: number = 0;
+	isOnShowOptions: boolean = false;
+	currentProductOption!: string;
 
 	ngOnChanges(): void {
 		this.filteredData = this.tableDataSet;
@@ -41,8 +45,8 @@ export class UiTableV1Component implements OnChanges {
 		this.currentPage = 0;
 	}
 
-	goTo() {
-		this._router.navigate([this.buttonActionPath], { relativeTo: this._activatedRoute });
+	goTo(action: string, id?: any) {
+		this._router.navigate(id ? [action, id] : [action], { relativeTo: this._activatedRoute });
 	}
 
 	nextPage() {
@@ -51,5 +55,10 @@ export class UiTableV1Component implements OnChanges {
 
 	prevPage() {
 		if (this.currentPage > 0) this.currentPage -= this.itemsPerPage;
+	}
+
+	showOptions(id?: string) {
+		this.isOnShowOptions = !this.isOnShowOptions;
+		if (id) this.currentProductOption = id;
 	}
 }

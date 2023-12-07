@@ -1,5 +1,5 @@
 export interface TableColumns {
 	label: string;
 	keyword: string;
-	type?: 'date' | 'image';
+	type?: 'date' | 'image' | 'options';
 }

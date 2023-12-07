@@ -2,5 +2,9 @@
 	<app-ui-table-v1
 		[tableColumns]="columns"
 		[tableDataSet]="dataSet"
-		[buttonActionPath]="'../create'"></app-ui-table-v1>
+		[buttonActionPath]="'../create'"
+		[options]="[
+			{ name: 'Actualizar', path: '../update' },
+			{ name: 'Eliminar', path: '../delete' }
+		]"></app-ui-table-v1>
 </div>

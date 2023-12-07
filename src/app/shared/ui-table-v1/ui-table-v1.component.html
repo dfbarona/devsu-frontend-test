@@ -13,7 +13,7 @@
 		</form>
 		<button
 			class="__button --fill"
-			(click)="goTo()">
+			(click)="goTo(buttonActionPath)">
 			<span class="text-body--1"><b>Agregar</b></span>
 		</button>
 	</div>
@@ -25,6 +25,9 @@
 						<th class="__cell">
 							<span class="text-body--1">{{ tableColumn.label }}</span>
 						</th>
+					}
+					@if (options && options.length > 0) {
+						<th class="__cell">Opciones</th>
 					}
 				</tr>
 			</thead>
@@ -47,39 +50,68 @@
 								}
 							</td>
 						}
+						@if (options && options.length > 0) {
+							<td
+								class="__cell --options"
+								(click)="showOptions(tableData['id'])">
+								<img
+									class="__image"
+									src="/assets/icons/options.svg"
+									alt="Opciones" />
+
+								<ul
+									class="__dropdown"
+									[ngClass]="{
+										'--visible': isOnShowOptions && currentProductOption === tableData['id']
+									}">
+									@for (option of options; track $index) {
+										<li
+											class="__option"
+											(click)="goTo(option.path, tableData['id'])">
+											{{ option.name }}
+										</li>
+									}
+								</ul>
+							</td>
+						}
 					</tr>
 				}
 			</tbody>
 		</table>
-		<div class="table-footer">
-			<span class="__count-records">{{ filteredData.length | pluralize: 'Resultado' }} </span>
-			<div class="__paginate">
-				<button
-					class="__button"
-					[disabled]="currentPage === 0"
-					(click)="prevPage()">
-					Anteriores
-				</button>
-				<button
-					class="__button"
-					[disabled]="filteredData.length - itemsPerPage <= currentPage"
-					(click)="nextPage()">
-					Siguientes
-				</button>
-			</div>
-			<form class="__form--1">
-				<div class="__field">
-					<select
-						class="__input"
-						name="itemsPerPage"
-						(change)="filterData()"
-						[(ngModel)]="itemsPerPage">
-						<option [value]="5">5</option>
-						<option [value]="10">10</option>
-						<option [value]="20">20</option>
-					</select>
-				</div>
-			</form>
+	</div>
+	<div class="__footer">
+		<span class="__count-records">{{ filteredData.length | pluralize: 'Resultado' }} </span>
+		<div class="__paginate">
+			<button
+				class="__button"
+				[disabled]="currentPage === 0"
+				(click)="prevPage()">
+				Anteriores
+			</button>
+			<button
+				class="__button"
+				[disabled]="filteredData.length - itemsPerPage <= currentPage"
+				(click)="nextPage()">
+				Siguientes
+			</button>
 		</div>
+		<form class="__form--1">
+			<div class="__field">
+				<select
+					class="__input"
+					name="itemsPerPage"
+					(change)="filterData()"
+					[(ngModel)]="itemsPerPage">
+					<option [value]="5">5</option>
+					<option [value]="10">10</option>
+					<option [value]="20">20</option>
+				</select>
+			</div>
+		</form>
 	</div>
 </div>
+@if (isOnShowOptions) {
+	<div
+		class="background-layer"
+		(click)="showOptions()"></div>
+}

@@ -1,0 +1,167 @@
+<div class="main-container">
+	<h1 class="__title heading--1">
+		<b>{{ formTitle }}</b>
+	</h1>
+	<div class="__divider"></div>
+	<form
+		class="__form--1"
+		[formGroup]="form"
+		(ngSubmit)="submit()">
+		<div class="--wrapper">
+			<!-- ------------------- Field  ------------------- -->
+			<div class="__field">
+				<label
+					class="__label text-body--1"
+					for="id"
+					><b>ID</b></label
+				>
+				<input
+					type="text"
+					class="__input"
+					formControlName="id"
+					id="id" />
+				@if (idField?.touched && idField?.invalid) {
+					<div class="validations">
+						@if (idField?.touched && idField?.hasError('required')) {
+							<span class="__span text-body--2">Este campo es requerido</span>
+						} @else if (idField?.touched && idField?.hasError('minlength')) {
+							<span class="__span text-body--2">Este campo debe tener más de 3 caracteres</span>
+						} @else if (idField?.touched && idField?.hasError('maxlength')) {
+							<span class="__span text-body--2">Este campo debe tener maximo 10 caracteres</span>
+						} @else if (idField?.touched && idField?.errors) {
+							<span class="__span text-body--2">Este ID de producto ya existe</span>
+						}
+					</div>
+				}
+			</div>
+
+			<!-- ------------------- Field  ------------------- -->
+			<div class="__field">
+				<label
+					class="__label text-body--1"
+					for="name"
+					><b>Nombre</b></label
+				>
+				<input
+					type="text"
+					class="__input"
+					formControlName="name"
+					id="name" />
+				@if (nameField?.touched && nameField?.invalid) {
+					<div class="validations">
+						@if (nameField?.touched && nameField?.hasError('required')) {
+							<span class="__span text-body--2">Este campo es requerido</span>
+						} @else if (nameField?.touched && nameField?.hasError('minlength')) {
+							<span class="__span text-body--2">Este campo debe tener más de 5 caracteres</span>
+						} @else if (nameField?.touched && nameField?.hasError('maxlength')) {
+							<span class="__span text-body--2">Este campo debe tener maximo 100 caracteres</span>
+						}
+					</div>
+				}
+			</div>
+		</div>
+
+		<div class="--wrapper">
+			<!-- ------------------- Field  ------------------- -->
+			<div class="__field">
+				<label
+					class="__label text-body--1"
+					for="description"
+					><b>Descripción</b></label
+				>
+				<input
+					type="text"
+					class="__input"
+					formControlName="description"
+					id="description" />
+				@if (descriptionField?.touched && descriptionField?.invalid) {
+					<div class="validations">
+						@if (descriptionField?.touched && descriptionField?.hasError('required')) {
+							<span class="__span text-body--2">Este campo es requerido</span>
+						} @else if (descriptionField?.touched && descriptionField?.hasError('minlength')) {
+							<span class="__span text-body--2">Este campo debe tener más de 10 caracteres</span>
+						} @else if (descriptionField?.touched && descriptionField?.hasError('maxlength')) {
+							<span class="__span text-body--2">Este campo debe tener maximo 200 caracteres</span>
+						}
+					</div>
+				}
+			</div>
+			<!-- ------------------- Field  ------------------- -->
+			<div class="__field">
+				<label
+					class="__label text-body--1"
+					for="logo"
+					><b>Logo</b></label
+				>
+				<input
+					type="text"
+					class="__input"
+					formControlName="logo"
+					id="logo" />
+				@if (logoField?.touched && logoField?.invalid) {
+					<div class="validations">
+						@if (logoField?.touched && logoField?.hasError('required')) {
+							<span class="__span text-body--2">Este campo es requerido</span>
+						}
+					</div>
+				}
+			</div>
+		</div>
+
+		<div class="--wrapper">
+			<!-- ------------------- Field  ------------------- -->
+			<div class="__field">
+				<label
+					class="__label text-body--1"
+					for="id"
+					><b>Fecha Liberación</b></label
+				>
+				<input
+					type="date"
+					class="__input"
+					formControlName="dateRelease"
+					[min]="currentDate"
+					id="dateRelease" />
+				@if (dateReleaseField?.touched && dateReleaseField?.invalid) {
+					<div class="validations">
+						@if (dateReleaseField?.touched && dateReleaseField?.hasError('required')) {
+							<span class="__span text-body--2">Este campo es requerido</span>
+						}
+					</div>
+				}
+			</div>
+
+			<!-- ------------------- Field  ------------------- -->
+			<div class="__field">
+				<label
+					class="__label text-body--1"
+					for="dateRevision"
+					><b>Fecha Revisión</b></label
+				>
+				<input
+					type="date"
+					class="__input"
+					id="dateRevision"
+					[value]="dateRevision"
+					disabled />
+			</div>
+		</div>
+		<div class="__buttons">
+			@if (type === 'post') {
+				<button
+					class="__button"
+					type="button"
+					(click)="reset()">
+					<span class="text-body--1"><b>Reiniciar</b></span>
+				</button>
+			}
+
+			<button
+				class="__button --fill"
+				[ngClass]="{ '--disabled': form.invalid }"
+				[disabled]="form.invalid">
+				<span class="text-body--1"><b>Enviar</b></span>
+			</button>
+		</div>
+	</form>
+</div>

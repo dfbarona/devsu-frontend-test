@@ -4,8 +4,6 @@
 	overflow-x: hidden;
 
 	.main {
-		display: flex;
-		justify-content: center;
 		width: 100%;
 		min-height: calc(100vh - $header-height);
 		padding-block: 5rem;
@@ -17,6 +15,8 @@
 		}
 		.--wrapper {
 			max-width: 1200px;
+			margin-inline: auto;
+			overflow-x: hidden;
 		}
 	}
 }

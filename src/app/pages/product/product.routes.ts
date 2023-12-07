@@ -15,4 +15,9 @@ export const productRoutes: Routes = [
 		loadComponent: () =>
 			import('./components/create/create.component').then((c) => c.CreateComponent),
 	},
+	{
+		path: 'update/:id',
+		loadComponent: () =>
+			import('./components/update/update.component').then((c) => c.UpdateComponent),
+	},
 ];
