@@ -14,7 +14,7 @@
 		<button
 			class="__button --fill"
 			(click)="goTo(buttonActionPath)">
-			<span class="text-body--1"><b>Agregar</b></span>
+			<span class="text-body--1">Agregar</span>
 		</button>
 	</div>
 	<div class="table-container">
@@ -67,7 +67,14 @@
 									@for (option of options; track $index) {
 										<li
 											class="__option"
-											(click)="goTo(option.path, tableData['id'])">
+											(click)="
+												openOption(
+													option.path,
+													tableData['id'],
+													option.presentation,
+													'¿Estás seguro de eliminar el producto ' + tableData['name'] + '?'
+												)
+											">
 											{{ option.name }}
 										</li>
 									}
@@ -115,3 +122,9 @@
 		class="background-layer"
 		(click)="showOptions()"></div>
 }
+
+<app-ui-modal-v1
+	[visible]="visible"
+	[contentModal]="contentModal"
+	(confirm)="confirmDelete()"
+	(modalSwitch)="closeModal()"></app-ui-modal-v1>

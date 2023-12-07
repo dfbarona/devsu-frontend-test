@@ -52,8 +52,8 @@ export class ProductsService {
 		});
 	}
 
-	deleteProducts(body: any, id: any) {
-		return this._http.delete(`${this._apiUrl}/${this._productsEndpoint}/${id}`, {
+	deleteProducts(id: any) {
+		return this._http.delete<string>(`${this._apiUrl}/${this._productsEndpoint}?id=${id}`, {
 			headers: this._headers,
 		});
 	}

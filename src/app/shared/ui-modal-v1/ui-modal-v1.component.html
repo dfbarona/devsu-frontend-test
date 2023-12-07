@@ -1,0 +1,21 @@
+<div
+	class="__main-container"
+	[ngClass]="{ '--visible': visible }">
+	<div class="__modal">
+		<div class="__title heading--2">Titulo</div>
+		<div class="__divider"></div>
+		<div class="__container">{{ contentModal }}</div>
+		<div class="__footer">
+			<button
+				class="__button --fill"
+				(click)="confirmAction()">
+				Confirmar
+			</button>
+			<button
+				class="__button"
+				(click)="closeModal()">
+				Cancelar
+			</button>
+		</div>
+	</div>
+</div>
